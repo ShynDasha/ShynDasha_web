@@ -1,60 +1,63 @@
-<!--html файл з формою для додавання викладача-->
+<!--Завдання 1. html файл з формою для додавання викладача-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-       
-        input, select, textarea {
-            margin-bottom: 10px;
-        }
-        h5 {
-            display: block;
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 
 <body> 
+
+<form>
    <blockquote>
    <strong><h2>Форма для додавання викладача</h2></strong>
 
    <p>
     <h5 for="name">Повне ім’я:</h5>
     <input type="text" id="name" name="name" required>
+    <br>
 
     <h5>Стать</h5>
     <select id="gender" name="gender" required>
         <option value="male">Чоловіча</option>
         <option value="female">Жіноча</option>
     </select>
+    <br>
 
     <h5>Дата народження</h5>
     <input type="date" id="birthdate" name="birthdate" required>
+    <br>
 
     <h5>Email</h5>
     <input type="email" id="email" name="email" required>
+    <br>
 
     <h5>Номер телефону</h5>
     <input type="tel" id="numb" name="numb" required>
+    <br>
 
     <h5>Країна</h5>
     <input type="text" id="country" name="country" required>
+    <br>
 
     <h5>Місто</h5>
     <input type="text" id="city" name="city" required>
+    <br>
 
     <h5>Бажаний колір фону <small>(необов'язково)</small> </h5>
-    <input type="text" id="fon" name="fon" required>
+    <input type="color"  name="data-background-color" required>
+    <br>
 
+    
     <h5>Коментар <small>(необов'язково)</small> </h5>
     <textarea id="comment" name="comment"></textarea>
+    <br>
+
     </p>
     <button type="submit">Додати</button>
     </blockquote>
-    
+</form> 
 </body>
 
 </html>
