@@ -5,66 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizza KMA</title>
     <link rel="stylesheet" href="style.css">
-    <script src="pizza-data.js" defer></script>
-    <script src="code.js" defer></script>
 </head>
 <body>
-    <header>
-        <section class="topBar">
-            <section class="top-badge">
-                <a>
-                    <p>PIZZA</p>
-                    <p>КМА</p>
-                </a>
-            </section>
+<div class="container">
+    <div class="left-block">
+        <section id="PizzaKma">
+            PIZZA KMA
+            <div class="triangle triangle1"></div>
+            <div class="triangle triangle2"></div>
+        </section>
+        <header>
             <section class="information">
                 <section class="contact">
-                    <span class="phone">(044) 222 5 222</span>
-                    <span class="schedule">24 години / 7 днів на тиждень</span>
-                    <span class="delivery">Безкоштовна доставка піци</span>
-                    <button class="login">Ввійти</button>
+                    <div>
+                        <p id="phone">(044) 222 5 222</p>
+                        <p id="schedule">24 години / 7 днів на тиждень</p>
+                        <p id="delivery">Безкоштовна доставка піци</p>
+                    </div>
+                    <button class="exitButton">Ввійти</button>
+                </section>
+                <section class="information-row">
+                    <p id="pizza-label">Піца</p>
+                    <button class="exitButton" id="hidButton">Ввійти</button>
                 </section>
             </section>
-            <section class="information-row">
-                <a class="pizza-label">Піца</a>
-            </section>
-        </section>
-    </header>
-    <main>
-        <section class="left-block">
+        </header>
+        <nav>
             <section class="head-menu">
-                <section style="justify-self: center; margin-bottom: 10px;">
-                    <div class="all-pizza"><strong>Усі піци</strong><div class="quantity">8</div></div>
-                </section>
-                <section>
-                    <button class="select-button">Усі</button>
-                    <button class="select-decelect">Мʼясні</button>
-                    <button class="select-decelect">З ананасами</button>
-                    <button class="select-decelect">З грибами</button>
-                    <button class="select-decelect">З морепродуктами</button>
-                    <button class="select-decelect">Вега</button>
-                </section>
+                <div class="all-pizza"><strong>Усі піци</strong><div class="quantity">8</div></div>
+                <div id="filter">
+                    <div class="select-decelect active" data-filter="Усі">Усі піци</div>
+                    <div class="select-decelect" data-filter="М’ясна піца">М’ясні піци</div>
+                    <div class="select-decelect" data-filter="З ананасами">З ананасами</div>
+                    <div class="select-decelect" data-filter="З грибами">З грибами</div>
+                    <div class="select-decelect" data-filter="З морепродуктами">З морепродуктами</div>
+                    <div class="select-decelect" data-filter="Вега піца">Вега піци</div>
+                </div>
+                
             </section>
-            <section class="pizzas-wrapper"></section>
-            <section class="lower-badge">
-                <a>
-                    <p>Цього тижня на все</p>
-                    <p>20%</p>
-                </a>
+        </nav>
+        <section id="pizzas-wrapper"></section>
+        <div class="lower-badge">
+            <section id="badgeSale">
+                <div id="textSale">ЦЬОГО ТИЖНЯ НА ВСЕ</div>
+                <div id="sale">-20%</div>
+                <div id="saleStrip"></div>
+                <div class="triangle triangle3"></div>
+                <div class="triangle triangle4"></div>
             </section>
+        </div>
+    </div>
+    <div class="right-block">
+        <section id="head-label">
+            <section class="order">
+                <div class="orderLabel"><b>Замовлення</b><div class="quantity">3</div></div>
+            </section>
+            <div class="cancel-order">Очистити замовлення</div>
         </section>
-        <section class="right-block">
-            <section class="head-label">
-                <section style="justify-self: center; margin-bottom: 10px;">
-                    <div class="all-pizza"><strong>Замовлення</strong><div class="quantity">3</div></div>
-                </section>
-                <div class="cancel-order">Очистити замовлення</div>
-            </section>
-            <section class="price-order">
-                <div>Сума замовлення</div>
-                <button>Замовити</button>
-            </section>
-        </section>
-    </main>
+        <section class="orderPizzas"></section>
+    </div>
+</div>
+<script src="code.js"></script>
 </body>
 </html>

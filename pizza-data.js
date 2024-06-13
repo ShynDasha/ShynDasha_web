@@ -1,4 +1,4 @@
-const pizzaData = [
+let pizza_info = [
     {
         id: 1,
         icon: 'pizza_7.jpg',
@@ -22,7 +22,7 @@ const pizzaData = [
             price: 169
         },
         is_new: true,
-        is_popular: true
+        is_popular: false,
     },
     {
         id: 2,
@@ -32,7 +32,7 @@ const pizzaData = [
         content: {
             meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
             cheese: ['сир домашній'],
-            mushroom: ['шампінmйони'],
+            mushroom: ['шампінйони'],
             additional: ['петрушка', 'оливки']
         },
         small_size: {
@@ -67,29 +67,8 @@ const pizzaData = [
             weight: 780,
             size: 40,
             price: 179
-        }
-    },
-    {
-        id: 4,
-        icon: 'pizza_5.jpg',
-        title: "Сициліано",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['вітчина', 'салямі'],
-            cheese: ['сир моцарелла'],
-            mushroom: ['шампіньйони'],
-            additional: ['перець болгарський', 'соус томатний']
         },
-        small_size: {
-            weight: 450,
-            size: 30,
-            price: 111
-        },
-        big_size: {
-            weight: 790,
-            size: 40,
-            price: 169
-        }
+        is_popular: true
     },
     {
         id: 17,
@@ -115,7 +94,7 @@ const pizzaData = [
         content: {
             meat: ['ковбаски'],
             cheese: ['сир моцарелла'],
-            mushroom: ['шампіньйони'],
+            mushroom: ['шампінйони'],
             pineapple: ['ананаси'],
             additional: ['цибуля кримська', 'огірки квашені', 'соус гірчичний']
         },
@@ -136,7 +115,7 @@ const pizzaData = [
         title: "Дольче Маре",
         type: 'Морська піца',
         content: {
-            ocean: ['креветки тигрові', 'мідії', 'ікра червона', 'філе червоної риби'],
+            ocean: ['криветки тигрові', 'мідії', 'ікра червона', 'філе червоної риби'],
             cheese: ['сир моцарелла'],
             additional: ['оливкова олія', 'вершки']
         },
@@ -166,5 +145,28 @@ const pizzaData = [
             size: 40,
             price: 299
         }
-    }
+    },
+    {
+        id: 4,
+        icon: 'pizza_5.jpg',
+        title: "Сициліано",
+        type: 'М’ясна піца',
+        content: {
+            meat: ['вітчина', 'салямі'],
+            cheese: ['сир моцарелла'],
+            mushroom: ['шампіньйони'],
+            additional: ['перець болгарський', 'соус томатний']
+        },
+        small_size: {
+            weight: 450,
+            size: 30,
+            price: 111
+        },
+        big_size: {
+            weight: 790,
+            size: 40,
+            price: 169
+        }
+    },
+    
 ];
