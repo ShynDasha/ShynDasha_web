@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     ];
 
     const pizzaContainer = document.querySelector('#pizzas-wrapper');
-    const orderPizzasContainer = document.querySelector('.orderPizzas');
+    const orderPizzas= document.querySelector('.orderPizzas');
     const textContentClass = 'textContent';
     const pizzaHeaderClass = 'pizzaType';
     const pizzaTitle = 'pizzaTitle';
@@ -262,72 +262,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
 }
 
-function setupBuyButtons() {
-    document.querySelectorAll('.buyButton').forEach(button => {
-        button.addEventListener('click', (event) => {
-            const pizzaCard = event.target.closest('.pizza');
-            const pizzaTitle = pizzaCard.querySelector('h3').innerText;
-            const size = event.target.closest('div').id === 'smallSize' ? 30 : 40;
-            const weight = event.target.closest('div').querySelector('.picWeight').nextElementSibling.innerText;
-            const price = parseInt(event.target.closest('div').querySelector('#price').innerText, 10);
-
-            const orderDiv = document.createElement('div');
-            orderDiv.className = 'pizzaCart';
-            orderDiv.innerHTML = `
-                <div>${pizzaTitle} (${size} см)</div>
-                <div>${price} грн</div>
-                <button class="removeButton">X</button>`;
-
-            orderPizzasContainer.appendChild(orderDiv);
-            updateTotal(price);
-
-            orderDiv.querySelector('.removeButton').addEventListener('click', () => {
-                updateTotal(-price);
-                orderDiv.remove();
-            });
-
-            saveOrderToLocalStorage();
-        });
-    });
-}
-
-function updateTotal(amount) {
-    totalSum += amount;
-    document.getElementById('orderPrice').innerText = `${totalSum} грн`;
-}
-
-function saveOrderToLocalStorage() {
-    const orders = [];
-    document.querySelectorAll('.pizzaCart').forEach(pizzaCart => {
-        const pizzaTitle = pizzaCart.children[0].innerText;
-        const pizzaPrice = parseInt(pizzaCart.children[1].innerText, 10);
-        orders.push({ title: pizzaTitle, price: pizzaPrice });
-    });
-    localStorage.setItem('order', JSON.stringify(orders));
-}
-
-function loadOrderFromLocalStorage() {
-    const orders = JSON.parse(localStorage.getItem('order')) || [];
-    orders.forEach(order => {
-        const orderDiv = document.createElement('div');
-        orderDiv.className = 'pizzaCart';
-        orderDiv.innerHTML = `
-            <div>${order.title}</div>
-            <div>${order.price} грн</div>
-            <button class="removeButton">X</button>`;
-        
-        orderPizzasContainer.appendChild(orderDiv);
-        updateTotal(order.price);
-
-        orderDiv.querySelector('.removeButton').addEventListener('click', () => {
-            updateTotal(-order.price);
-            orderDiv.remove();
-            saveOrderToLocalStorage();
-        });
-    });
-}
-
-loadOrderFromLocalStorage();
 
 document.querySelectorAll('#filter .select-decelect').forEach(button => {
     button.addEventListener('click', (event) => {
@@ -347,12 +281,7 @@ document.querySelectorAll('#filter .select-decelect').forEach(button => {
 });
 
 
-document.querySelector('.cancel-order').addEventListener('click', () => {
-    orderPizzasContainer.innerHTML = '';
-    totalSum = 0;
-    document.getElementById('orderPrice').innerText = '0 грн';
-    localStorage.removeItem('order');
-});
+
 
 renderPizzas();
 

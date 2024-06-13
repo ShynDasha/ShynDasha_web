@@ -448,7 +448,7 @@ header p {
 @media  screen and (max-width: 1200px) {
     
     #PizzaKma {
-        height: 8em;
+        height: 6em;
     }
     #delivery,
     #schedule,
@@ -469,19 +469,21 @@ header p {
         visibility: visible;
     }
    
-   
+
 }
 
 @media screen and (min-width: 500px) and (max-width:1079px) {
     #PizzaKma {
-        height: 6em; /* Adjust height for smaller screens */
+        height: 3em; /* Adjust height for smaller screens */
     }
     .head-menu{
        padding-top: 1em;
-       visibility: hidden;
+    }
+    .all-pizza{
+        visibility: hidden;
     }
     #filter{
-        visibility: hidden;
+        font-size: 0.6em;
     }
     .all-pizza {
         font-size: 4em;
@@ -498,18 +500,30 @@ header p {
 }
 @media screen and (min-width: 1000px) {
     #PizzaKma {
-        height: 8.5em; 
+        height: 6.5em; 
     }
-    
+    .head-menu{
+        padding-top: 7em;
+       
+     }
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1500px) {
     .head-menu{
-        padding-top: 0em;
-        visibility: hidden;
+        padding-top: 4em;
+       
      }
+     .all-pizza{
+        visibility: hidden;
+    }
+    #filter{
+        font-size: 0.9em;
+    }
     
-     
+     .cancel-order{
+        font-size: 0.7em;
+        right:0.3em;
+    }
 }
 
 @media screen  and (max-width: 1091px) {
@@ -521,7 +535,7 @@ header p {
         width:56%;
     }
    
-    .pizzaAll{
+    .all-pizza{
         width:18em;
     }
     .badge-new{
@@ -531,9 +545,7 @@ header p {
         left: 11.6em;
     }
     
-    #orderLabel
-    {
-      
+    #orderLabel{
         padding-left: 1em;
         font-size: 1em;
     }
