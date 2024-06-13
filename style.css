@@ -472,9 +472,9 @@ header p {
 
 }
 
-@media screen and (min-width: 500px) and (max-width:1079px) {
+@media screen and (min-width: 500px) and (max-width:1080px) {
     #PizzaKma {
-        height: 3em; /* Adjust height for smaller screens */
+        height: 3em; 
     }
     .head-menu{
        padding-top: 1em;
@@ -553,9 +553,8 @@ header p {
     
 }
 
-.pizzaCart{
-    display: flex;
-    
+.pizzaOrd{
+   display: flex;
    width: 500%;
    height: 500%;
    background-color: #F5F5F5;
@@ -566,11 +565,10 @@ header p {
 .imgPizzaCart{
     height:auto;
     max-width: 10em;
-    position: relative;
-    right:-7em;  
+    position: absolute;
+    right:-5em;  
     z-index: 0;
    
-    
 }
 .info{
     margin: 0.5em;
@@ -592,7 +590,7 @@ header p {
     margin-top: 0.2em;
 }
 .functionalPanel,
-.buttonsAmount {
+.buttonsA {
     display: flex;
     justify-content: space-between;
     gap: 1em;
@@ -608,10 +606,10 @@ header p {
 }
 .delete,
 .amount,
-.sum {
-  
+.sumP {
    margin-top: 0.5em;
 }
+
 .amount{
     margin-right: 0.1em;
 }
@@ -627,7 +625,6 @@ header p {
     align-items: center;
     padding: 0.03em;
     margin-top:0.2em;
-    
 }
 .plus,
 .minus{
@@ -635,7 +632,7 @@ header p {
 }
 .delete{
     color: orange;
-    background-image: linear-gradient(rgb(248, 248, 248), rgb(214, 214, 214));
+    background:#c4c2c06b;
     padding-left: 0.5em;
     padding-right: 0.5em;
     border: 0.5px solid rgb(30, 0, 0);
@@ -644,42 +641,28 @@ header p {
     justify-content: center;
     cursor: pointer;
 }
-.delete:active {
-    background-image: linear-gradient(rgba(248, 248, 248, 0.85), rgbq(214, 214, 214, 0.85));
-}
-.delete:hover {
-    background-image: linear-gradient(rgba(248, 248, 248, 0.797), rgba(214, 214, 214, 0.797));
-    color: rgb(251, 179, 44);
-}
+
 .minus {
-    background-color: red;
-    cursor: pointer;
-}
-.minus:active{
-    background-color: hsla(0, 94%, 60%, 0.85);
-}
-.minus:hover{
-    background-color: hsla(0, 94%, 60%, 0.75);
-}
-.plus {
-    background-color: hsla(126, 98%, 41%, 1);
+    background-color: #dc3545;
     cursor: pointer;
 }
 
-.plus:hover{
-    background-color: hsla(126, 98%, 41%, 0.7);
+.plus {
+    background-color: #28a745;
+    cursor: pointer;
 }
-.plus:active{
-    background-color: hsla(126, 98%, 41%, 0.8);
+.plus:active,
+.minus:active{
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0); 
 }
-.pizzaCart label {
+.pizzaOrd label {
     color: orange;
-    font-size: 16px;
+    font-size: 1.3em;
     font-weight: 200;
 }
 .orderText{
     position: fixed;
- 
 }
 
 .panelForOrdering{
