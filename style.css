@@ -442,7 +442,7 @@ header p {
 
 @media screen and (max-width: 921px){
     #PizzaKma {
-        height: 8em;
+        height: 6em;
     }
 }
 @media  screen and (max-width: 1200px) {
@@ -500,7 +500,7 @@ header p {
 }
 @media screen and (min-width: 1000px) {
     #PizzaKma {
-        height: 6.5em; 
+        height: 6em; 
     }
     .head-menu{
         padding-top: 7em;
