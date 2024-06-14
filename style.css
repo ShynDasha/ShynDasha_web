@@ -494,21 +494,21 @@ footer{
         height: 3em; 
     }
     .head-menu{
-       padding-top: 1em;
-    }
-    .all-pizza{
-        visibility: hidden;
+       padding-top: 10em;
     }
     #filter{
-        font-size: 0.6em;
+        display: flex;
+        flex-wrap: wrap; /* Додаємо flex-wrap */
+        justify-content: center;
+        align-items: center;
     }
     .all-pizza {
-        font-size: 4em;
+        font-size: 3em;
      }
      #delivery,
      #schedule,
      #pizza-label{
-         display: none ;
+        display: none ;
      }
      .cancel-order{
         font-size: 0.6em;
@@ -527,12 +527,14 @@ footer{
 
 @media screen and (min-width: 1000px) and (max-width: 1500px) {
     .head-menu{
-        padding-top: 6em;
+        padding-top: 9em;
        
      }
-    
-    #filter{
-        font-size: 0.9em;
+     #filter {
+        display: flex;
+        flex-wrap: wrap; /* Додаємо flex-wrap */
+        justify-content: center;
+        align-items: center;
     }
     
      .cancel-order{
@@ -549,9 +551,13 @@ footer{
     header {
         width:56%;
     }
-   
+    .head-menu{
+        padding-top: 8em;
+     }
+    
     .all-pizza{
-        width:18em;
+        width:14em;
+        font-size: 1.6em;
     }
     .badge-new{
         left: 14em;
@@ -570,10 +576,17 @@ footer{
     #orderButton{
         margin-left: 3.5em;
     }
+    .all-pizza{
+        width:5em;
+        font-size: 1.2em;
+    }
+    .head-menu{
+        padding-top: 6em;
+     }
+    
 }
 @media screen  and (min-width: 692px) and (max-width: 1091px){
-    #orderButton{
-        
+    #orderButton{ 
         width: 35%;
     }
 }
