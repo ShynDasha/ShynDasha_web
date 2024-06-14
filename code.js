@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 filteredPizzas = pizza_info.filter(pizza => pizza.content.ocean && pizza.content.ocean.length > 0);
                 break;
             default: filteredPizzas = filter === 'Усі' ? pizza_info : pizza_info.filter(pizza => pizza.type === filter);
-            break;
+            break;    
     }
 
     filteredPizzas.forEach(pizza => {

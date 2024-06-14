@@ -84,7 +84,8 @@
             "weight": 370,
             "size": 30,
             "price": 89
-        }
+        },
+        "is_popular": true
     },
     {
         "id": 43,
@@ -107,7 +108,8 @@
             "weight": 780,
             "size": 40,
             "price": 180
-        }
+        },
+        "is_popular": true
     },
     {
         "id": 90,
@@ -123,7 +125,8 @@
             "weight": 845,
             "size": 40,
             "price": 399
-        }
+        },
+        "is_popular": true
     },
     {
         "id": 6,
@@ -144,7 +147,8 @@
             "weight": 700,
             "size": 40,
             "price": 299
-        }
+        },
+        "is_popular": true
     },
     {
         "id": 4,
@@ -166,6 +170,7 @@
             "weight": 790,
             "size": 40,
             "price": 169
-        }
+        },
+        "is_popular": true
     }
 ]
