@@ -273,25 +273,33 @@ header p {
 
 #filter {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    color: #EC861C;
-   
+    
 }
+
+#filter .select-decelect {
+    margin: 1em;
+    cursor: pointer;
+    border: none;
+    background-color:  rgb(254, 249, 244); 
+    color: #EC861C; 
+    font-size: 1em;
+}
+
 #filter .select-decelect.active {
     background-color: #EC861C; 
     color: white; 
     border-color: #EC861C; 
     padding: 0.5em;
     border-radius: 0.4em;
-
 }
-.select-decelect{
+
+.select-decelect {
     margin: 1em;
     cursor: pointer;
 }
-
 
 
 .ingredients {
@@ -320,17 +328,17 @@ header p {
 
 #price{
     margin-top: 0em;
-    font-size: 10px;
+    font-size: 9px;
     color:rgb(42, 36, 36);
     text-shadow: 2px;
 }
 #priceUA{
-    font-size: 15px;
+    font-size: 14px;
 
 }
 
 .buyButton{
-    margin-right: 1em;
+    margin-right: 3em;
 }
 
 #badgeSale {
@@ -519,12 +527,10 @@ footer{
 
 @media screen and (min-width: 1000px) and (max-width: 1500px) {
     .head-menu{
-        padding-top: 4em;
+        padding-top: 6em;
        
      }
-    .all-pizza{
-        visibility: hidden;
-    }
+    
     #filter{
         font-size: 0.9em;
     }
