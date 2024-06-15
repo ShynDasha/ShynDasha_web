@@ -359,7 +359,6 @@ header p {
     bottom: 0; 
     left: 0; 
 
-
 }
 
 #sale{
@@ -382,18 +381,6 @@ header p {
     font-weight:lighter
 }
 
-
-.right-block{
-    display: flex;
-    box-sizing: border-box;
-    background-color: #F5F5F5;
-    padding: 1em;
-    padding-left: 0em;
-    padding-top:0em ;
-    right: 0;
-    bottom:0;
-    box-shadow: -8px 0 12px rgba(0, 0, 0, 0.1);
-}
 .panelForOrdering{
     position: fixed;
 }
@@ -604,12 +591,14 @@ footer{
 
    border-bottom: 1px solid lightgray;
    padding: 0.5em;
+   
 }
 .imgPizzaCart{
     height:auto;
     max-width: 10em;
     position: absolute;
-    right:-5em;  
+    margin-top: -1em;
+    right:-4em;  
     z-index: 0;
    
 }
@@ -618,7 +607,6 @@ footer{
     margin-right:0;
     padding-bottom: 0.9em;
     padding-top: 0.9em;
-
 }
 .sizeAndWeight{
     display: flex;
@@ -655,19 +643,20 @@ footer{
 
 .amount{
     margin-right: 0.1em;
+    margin-top:-4px;
 }
 .plus,
 .minus,
 .delete {
     border-radius: 3em;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.6em;
+    height: 1.6em;
     border: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.03em;
-    margin-top:0.2em;
+    padding: 0.3em;
+    margin-top:-0.3em;
 }
 .plus,
 .minus{
@@ -676,13 +665,9 @@ footer{
 .delete{
     color: orange;
     background:#c4c2c06b;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
     border: 0.5px solid rgb(30, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+   
+    margin-top: -1.em;
 }
 
 .minus {
@@ -714,6 +699,7 @@ footer{
     align-items: center;
     bottom: 8em;
     display: block;
+    
 }
 .orderText{
         display: flex;
@@ -724,21 +710,16 @@ footer{
         background-color:white;
         width: 200%;
         height: 100%;  
-       
-     }
-#sumUAH{
+}
+#sumOfAll{
     font-weight: bold;
     font-size: 1.1em;
     color: rgb(51, 25, 0);
     padding-right: 1em;
     position: fixed;
     right:0;
-    
 }
- #buttOrder{
-    width: 35%;
-    padding: 2em;
-}
+
 #orderButton{
    position: fixed;
    bottom: 0;
@@ -757,6 +738,26 @@ footer{
 .pizzaCart {
     max-height: 60em;
     padding: 0;
+    padding-top: 3em;
     margin: 0;
-    overflow-y: scroll;
+}
+.more{
+    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
+    font-weight: bold;
+    color: white;
+    padding: 3px;
+    font-size: 0.8em;
+    height: 3em;
+    width: 10em;
+    border: 0;
+    border-radius: 0.4em;
+    
+    margin-left: 3em;
+    margin-top: 2em;
+    transition: background-image 0.3s ease;
+}
+.more:hover{
+    font-weight: bold;
+    background-image: linear-gradient(rgb(252, 197, 107), rgb(250, 187, 87));
+    cursor: pointer;
 }

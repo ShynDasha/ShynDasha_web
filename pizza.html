@@ -54,6 +54,7 @@
         </div>
         <footer>
             <p>Pizza.24 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії <br>Доставка піци не здійснюється</p>
+            <button class="more">Статистика</button>
         </footer>
     </div>
     
@@ -62,109 +63,19 @@
             <section class="order">
                 <div class="orderLabel"><b>Замовлення</b><div class="quantity">3</div></div>
             </section>
-            <section class="pizzaOrd">
-                <div class="info">  
-                    <label for="pizzaOrd">BBQ (Мала)</label>
-                    <div class="sizeAndWeight">
-                        <div class="sizeCart">
-                            <img class="imgSize" src="size-icon.svg"/>
-                            <p class="sizeSorB">30</p>
-                        </div>
-                        <div class="weightCart">
-                            <img class="imgSize" src="weight.svg"/>
-                            <p class="sizeSorB">460</p>
-                        </div>
-                    </div>    
-                    <div class="functionalPanel">
-                        <div class="sumP"><b>556грн</b></div>
-                        <div class="buttonsA">
-                            <div class="plusAndMinus">
-                                <div class="minus">-</div>
-                                <div class="amount">4</div>
-                                <div class="plus">+</div>
-                            </div>
-                            <div class="delete"><b>x</b></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="imgCart">
-                    <img src="pizza_7.jpg" alt="піца" class="imgPizzaCart">
-                </div>
-            </section>
-
-            <section class="pizzaOrd">
-                <div class="info">  
-                    <label for="pizzaOrd">Россо Густо (Мала)</label>
-                    <div class="sizeAndWeight">
-                        <div class="sizeCart">
-                            <img class="imgSize" src="size-icon.svg"/>
-                            <p class="sizeSorB">30</p>
-                        </div>
-                        <div class="weightCart">
-                            <img class="imgSize" src="weight.svg"/>
-                            <p class="sizeSorB">400</p>
-                        </div>
-                    </div>    
-                    <div class="functionalPanel">
-                        <div class="sumP"><b>189грн</b></div>
-                        <div class="buttonsA">
-                            <div class="plusAndMinus">
-                                <div class="minus">-</div>
-                                <div class="amount">1</div>
-                                <div class="plus">+</div>
-                            </div>
-                            <div class="delete"><b>x</b></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="imgCart">
-                    <img src="pizza_4.jpg" alt="піца" class="imgPizzaCart">
-                </div>
-            </section>
-            
-            <section class="pizzaOrd">
-                <div class="info">  
-                    <label for="pizzaOrd">Міксовий поло (Велика)</label>
-                    <div class="sizeAndWeight">
-                        <div class="sizeCart">
-                            <img class="imgSize" src="size-icon.svg"/>
-                            <p class="sizeSorB">40</p>
-                        </div>
-                        <div class="weightCart">
-                            <img class="imgSize" src="weight.svg"/>
-                            <p class="sizeSorB">780</p>
-                        </div>
-                    </div>    
-                    <div class="functionalPanel">
-                        <div class="sumP"><b>179грн</b></div>
-                        <div class="buttonsA">
-                            <div class="plusAndMinus">
-                                <div class="minus">-</div>
-                                <div class="amount">1</div>
-                                <div class="plus">+</div>
-                            </div>
-                            <div class="delete"><b>x</b></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="imgCart">
-                    <img src="pizza_7.jpg" alt="піца" class="imgPizzaCart">
-                </div>
-            </section>
-            
         </section>        
         <section class="panelForOrdering">
-                <div class="cancel-order">Очистити замовлення</div>
+                <div class="cancel-order" id="clearLabel">Очистити замовлення</div>
                 <div class="orderText">
                      <div id="textSum">Сума замовлення</div>
-                     <div id="sumUAH"> 924 грн</div>
+                     <div id="sumOfAll">0 грн</div>
                  </div>
                  <button id="orderButton" class="buyButton">Замовити</button>
-             `;
+             
          </section>
-        <section class="orderPizzas"></section>
+        <section id="orderedPizzasContainer" class="orderPizzas"></section>
     </div>
 </div>
-<script src="code.js"></script>
+<script src="add.js"></script>
 </body>
 </html>

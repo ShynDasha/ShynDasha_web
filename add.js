@@ -1,24 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", (event) => {
     const pizzaContainer = document.querySelector('#pizzas-wrapper');
-    const orderPizzas = document.querySelector('.orderPizzas');
-    const sumUAH = document.getElementById('sumUAH');
-    const orderButton = document.getElementById('orderButton');
-    const cancelOrderButton = document.querySelector('.cancel-order');
+    const orderedPizzasContainer = document.querySelector('#orderedPizzasContainer');
+    const textContentClass = 'textContent';
+    const pizzaHeaderClass = 'pizzaType';
+    const pizzaTitle = 'pizzaTitle';
     const buyText = 'Купити';
+    const ingredients = 'ingredients';
+    let totalSum = 0;
 
+    
     let pizza_info = [];
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function fetchPizzas() {
-        // Assuming you have a local JSON file called "pizzas.json"
-        fetch('pizzas.json')
-            .then(response => response.json())
-            .then(data => {
-                pizza_info = data;
-                renderPizzas();
-            })
-            .catch(error => console.error('Error fetching pizzas:', error));
-    }
+    fetch('pizzas.json')
+        .then(response => response.json())
+        .then(data => {
+            pizza_info = data;
+            renderPizzas();
+        })
+        .catch(error => console.error('Error loading pizza data:', error));
 
     function renderPizzas(filter = 'Усі') {
         pizzaContainer.innerHTML = '';
@@ -44,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
             pizzaDiv.className = 'pizza';
 
             const badgeNew = pizza.is_new ? `<p class="badge badge-new">Нова</p>` : '';
-            const popularBadge = pizza.is_popular ? `<p class="badge badge-popular">Популярна</p>` : '';
+            const popularBadge = pizza.is_popular ? `<p class="badge badge-popular ${pizza.id >= 3 ? 'special' : ''}">Популярна</p>` : '';
 
             const smallSize = pizza.small_size ? `
-                <div id="smallSize">
+                <div id="smallSize">  
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.small_size.size}</p>
                     <p><img src="weight.svg" class="picWeight"/>${pizza.small_size.weight}</p>
                     <p id="price">${pizza.small_size.price} <span id=priceUA>грн.</span></p>
-                    <button class="buyButton" data-id="${pizza.id}" data-size="small"> ${buyText} </button>
+                    <button class="buyButton"> ${buyText} </button>
                 </div>` : '';
 
             const bigSize = pizza.big_size ? `
@@ -59,8 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.big_size.size}</p>
                     <p><img src="weight.svg" class="picWeight"/>${pizza.big_size.weight}</p>
                     <p id="price">${pizza.big_size.price} <span id=priceUA>грн.</span></p>
-                    <button class="buyButton" data-id="${pizza.id}" data-size="big"> ${buyText} </button>
+                    <button class="buyButton"> ${buyText}</button>
                 </div>` : '';
+
+            function capitalizeFirstWord(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
 
             const combinedIngredients = [
                 ...pizza.content.meat || [],
@@ -70,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...pizza.content.additional || []
             ].join(', ');
 
-            const capitalizeFirstWord = string => string.charAt(0).toUpperCase() + string.slice(1);
             const formattedIngredients = capitalizeFirstWord(combinedIngredients);
 
             const pizzaAll = `
@@ -78,10 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${popularBadge}
                 <div class="pizzaAll">
                     <img src="${pizza.icon}" alt="${pizza.title}" class="pizza-img">
-                    <h3 class="pizzaTitle">${pizza.title}</h3>
-                    <section class="textContent">
-                        <p class="pizzaType">${pizza.type}</p>
-                        <section class="ingredients">${formattedIngredients}</section>
+                    <h3 class="${pizzaTitle}">${pizza.title}</h3>
+                    <section class="${textContentClass}">
+                        <p class="${pizzaHeaderClass}">${pizza.type}</p>
+                        <section class="${ingredients}">
+                            ${formattedIngredients}
+                        </section>
                         <section class="size">
                             ${smallSize}
                             ${bigSize}
@@ -96,136 +100,146 @@ document.addEventListener('DOMContentLoaded', () => {
         setupBuyButtons();
     }
 
+    document.querySelectorAll('#filter .select-decelect').forEach(button => {
+        button.addEventListener('click', (event) => {
+            document.querySelectorAll('#filter .select-decelect').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderPizzas(event.target.dataset.filter);
+        });
+    });
+
     function setupBuyButtons() {
-        const buyButtons = document.querySelectorAll('.buyButton');
-        buyButtons.forEach(button => {
+        document.querySelectorAll('.buyButton').forEach(button => {
             button.addEventListener('click', (event) => {
-                const pizzaId = event.target.dataset.id;
-                const size = event.target.dataset.size;
-                addToCart(pizzaId, size);
+                const pizzaCard = event.target.closest('.pizza');
+                const pizzaTitle = pizzaCard.querySelector('.pizzaTitle').innerText;
+                const size = event.target.closest('div').id === 'smallSize' ? 30 : 40;
+                const weight = event.target.previousElementSibling.previousElementSibling.innerText;
+                const price = parseInt(event.target.previousElementSibling.innerText, 10);
+                const icon = pizzaCard.querySelector('img').src;
+                const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+
+                let existingPizza = orderedPizzas.find(pizza => pizza.title === pizzaTitle && pizza.size === size);
+                if (existingPizza) {
+                    existingPizza.amount++;
+                } else {
+                    existingPizza = {
+                        title: pizzaTitle,
+                        weight,
+                        size,
+                        price,
+                        icon,
+                        amount: 1
+                    };
+                    orderedPizzas.push(existingPizza);
+                }
+
+                updateLocalStorage(orderedPizzas);
+                renderOrderedPizzas();
+                updateTotalSum();
             });
         });
     }
 
-    function addToCart(pizzaId, size) {
-        const pizza = pizza_info.find(p => p.id == pizzaId);
-        const cartItem = cart.find(item => item.id == pizzaId && item.size == size);
-
-        if (cartItem) {
-            cartItem.quantity++;
-        } else {
-            cart.push({
-                id: pizza.id,
-                title: pizza.title,
-                size: size,
-                price: size === 'small' ? pizza.small_size.price : pizza.big_size.price,
-                weight: size === 'small' ? pizza.small_size.weight : pizza.big_size.weight,
-                quantity: 1,
-                icon: pizza.icon
-            });
+    function setUpLocalStorage() {
+        if (!localStorage.getItem('orderedPizzas')) {
+            localStorage.setItem('orderedPizzas', JSON.stringify([]));
         }
-
-        updateCart();
-        saveCart();
     }
 
-    function updateCart() {
-        orderPizzas.innerHTML = '';
+    function renderOrderedPizzas() {
+        const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+        orderedPizzasContainer.innerHTML = '';
 
-        cart.forEach(pizza => {
-            const pizzaElement = document.createElement('section');
-            pizzaElement.classList.add('pizzaOrd');
-            pizzaElement.innerHTML = `
-            <div class="info">  
-            <label for="pizaOrd">${pizza.title}</label>
-            <div class="sizeAndWeight">
-                <div class="sizeCart">
-                    <img class="imgSize" src="size-icon.svg"/>
-                    <p class="sizeSorB">${pizza.size}</p>
-                </div>
-                <div class="weightCart">
-                    <img class="imgSize" src="weight.svg"/>
-                    <p class="sizeNumber">${pizza.weight}</p>
-                </div>
-            </div>    
-            <div class="functionalPanel">
-                <div class="sumP"><b>${pizza.price}</b></div>
-                <div class="buttonsAmount">
-                    <div class="plusAndMinus">
-                        <div class="minus">-</div>
-                        <div class="amount">${pizza.amount}</div>
-                        <div class="plus">+</div>
+        orderedPizzas.forEach(pizza => {
+            const orderedPizza = document.createElement('div');
+            orderedPizza.className = 'pizzaCart';
+            orderedPizza.innerHTML = `
+                <div class="info">  
+                    <label for="pizaCart">${pizza.title}</label>
+                    <div class="sizeAndWeight">
+                        <div class="sizeCart">
+                            <img class="imgSize" src="size-icon.svg"/>
+                            <p class="sizeNumber">${pizza.size}</p>
+                        </div>
+                        <div class="weightCart">
+                            <img class="imgSize" src="weight.svg"/>
+                            <p class="sizeNumber">${pizza.weight}</p>
+                        </div>
+                    </div>    
+                    <div class="functionalPanel">
+                        <div class="sum"><b>${pizza.price}грн</b></div>
+                        <div class="buttonsAmount">
+                            <div class="plusAndMinus">
+                                <div class="minus">-</div>
+                                <div class="amount">${pizza.amount}</div>
+                                <div class="plus">+</div>
+                            </div>
+                            <div class="delete"><b>x</b></div>
+                        </div>
                     </div>
-                    <div class="delete"><b>x</b></div>
                 </div>
-            </div>
-        </div>
-        <div class="imgCart">
-            <img src="${pizza.icon}" alt="${pizza.title}" class="imgPizzaCart">
-        </div>
+                <div class="imgCart">
+                    <img src="${pizza.icon}" alt="${pizza.title}" class="imgPizzaCart">
+                </div>
             `;
-            orderPizzas.appendChild(pizzaElement);
+
+            orderedPizzasContainer.appendChild(orderedPizza);
+
+            const plusButton = orderedPizza.querySelector('.plus');
+            const minusButton = orderedPizza.querySelector('.minus');
+            const amountDisplay = orderedPizza.querySelector('.amount');
+
+            plusButton.addEventListener('click', () => {
+                pizza.amount++;
+                amountDisplay.textContent = pizza.amount;
+                updateLocalStorage(orderedPizzas);
+                updateTotalSum();
+            });
+
+            minusButton.addEventListener('click', () => {
+                if (pizza.amount > 1) {
+                    pizza.amount--;
+                    amountDisplay.textContent = pizza.amount;
+                    updateLocalStorage(orderedPizzas);
+                    updateTotalSum();
+                } else if (pizza.amount === 1) {
+                    orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
+                    updateLocalStorage(orderedPizzas);
+                    renderOrderedPizzas();
+                    updateTotalSum();
+                }
+            });
+
+            orderedPizza.querySelector('.delete').addEventListener('click', () => {
+                orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
+                updateLocalStorage(orderedPizzas);
+                renderOrderedPizzas();
+                updateTotalSum();
+            });
         });
 
         updateTotalSum();
-        setupCartButtons();
     }
 
-    function setupCartButtons() {
-        orderPizzas.addEventListener('click', (event) => {
-            const pizzaId = event.target.dataset.id;
-            const size = event.target.dataset.size;
 
-            if (event.target.classList.contains('plus')) {
-                updateCartItem(pizzaId, size, 'increment');
-            } else if (event.target.classList.contains('minus')) {
-                updateCartItem(pizzaId, size, 'decrement');
-            } else if (event.target.classList.contains('delete')) {
-                removeCartItem(pizzaId, size);
-            }
-        });
-    }
-
-    function updateCartItem(pizzaId, size, action) {
-        const cartItem = cart.find(item => item.id == pizzaId && item.size == size);
-
-        if (action === 'increment') {
-            cartItem.quantity++;
-        } else if (action === 'decrement') {
-            cartItem.quantity--;
-            if (cartItem.quantity === 0) {
-                cart = cart.filter(item => !(item.id == pizzaId && item.size == size));
-            }
-        }
-
-        updateCart();
-        saveCart();
-    }
-
-    function removeCartItem(pizzaId, size) {
-        cart = cart.filter(item => !(item.id == pizzaId && item.size == size));
-        updateCart();
-        saveCart();
+    function updateLocalStorage(orderedPizzas) {
+        localStorage.setItem('orderedPizzas', JSON.stringify(orderedPizzas));
     }
 
     function updateTotalSum() {
-        let totalSum = 0;
-        cart.forEach(pizza => totalSum += pizza.price * pizza.quantity);
-        sumUAH.textContent = `${totalSum} грн`;
+        const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+        totalSum = orderedPizzas.reduce((sum, pizza) => sum + pizza.price * pizza.amount, 0);
+        document.querySelector('#sumOfAll').textContent = `${totalSum} грн`;
     }
 
-    function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
+    setUpLocalStorage();
+    renderOrderedPizzas();
 
-    function clearCart() {
-        cart = [];
-        updateCart();
-        saveCart();
-    }
+    document.querySelector('#clearLabel').addEventListener('click', () => {
+        localStorage.setItem('orderedPizzas', JSON.stringify([]));
+        renderOrderedPizzas();
+    });
 
-    cancelOrderButton.addEventListener('click', clearCart);
-
-    fetchPizzas();
-    updateCart();
+    renderPizzas();
 });
