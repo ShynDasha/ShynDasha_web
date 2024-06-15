@@ -159,7 +159,7 @@ header p {
 }
 
 .triangle1 {
-    border-left: 102.5px solid transparent;
+    border-left: 80.5px solid transparent;
     border-right: 0px solid transparent;
     bottom: -1em;
     border-top: 20px solid #EC861C;
@@ -167,7 +167,7 @@ header p {
 }
 
 .triangle2 {
-    border-right: 102.5px solid transparent;
+    border-right: 80.5px solid transparent;
     border-left: 0px solid transparent;
     bottom: -1em;
     border-top: 20px solid #EC861C;
@@ -175,7 +175,7 @@ header p {
 }
 
 .triangle3 {
-    border-left: 102.5px solid transparent;
+    border-left: 80.5px solid transparent;
     border-right: 0px solid transparent;
     top: -1em;
     border-bottom: 20px solid #EC861C;
@@ -183,7 +183,7 @@ header p {
 }
 
 .triangle4 {
-    border-right: 102.5px solid transparent;
+    border-right: 80.5px solid transparent;
     border-left: 0px solid transparent;
     top: -1em;
     border-bottom: 20px solid #EC861C;
@@ -352,7 +352,7 @@ header p {
     margin-top:8em;
     font-weight: bold;
     cursor: pointer;
-    height: 5em;
+    height: 7.2em;
     width: 5em;
     z-index: 13;
     position: fixed; 
@@ -478,7 +478,7 @@ footer{
 
 @media screen and (min-width: 500px) and (max-width:1080px) {
     #PizzaKma {
-        height: 3em; 
+        height: 6em; 
     }
     .head-menu{
        padding-top: 10em;
@@ -504,7 +504,7 @@ footer{
 }
 @media screen and (min-width: 1000px) {
     #PizzaKma {
-        height: 6em; 
+        height: 8em; 
     }
     .head-menu{
         padding-top: 7em;
