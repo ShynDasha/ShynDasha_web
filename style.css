@@ -356,7 +356,6 @@ header p {
     position: fixed; 
     bottom: 0; 
     left: 0; 
-
 }
 
 #sale{
@@ -378,10 +377,20 @@ header p {
 /* права частина ------------------------------------------------------------------------------------------------*/
 .right-block{
     background-color: #F5F5F5;
+    overflow: hidden;
 }
-
+#orderedPizzasContainer{
+    position: fixed;
+    max-height: 80vh; /* Встановіть потрібну максимальну висоту */
+    overflow-y: auto; /* Додайте вертикальну прокрутку */
+    overflow-x: hidden;
+    width: 400px; 
+    
+}
 .panelForOrdering{
     position: fixed;
+    z-index: 10;
+   
 }
 .orderedPizzas{
     background-color: #F5F5F5 ;
@@ -394,27 +403,18 @@ header p {
     display: flex;
     justify-content: space-between;
     gap: 3em;
-    margin-bottom: 1em;
-   
+ 
     padding-top: 0.5em;
     padding-right: 1em;
     padding-bottom: 1.5em;
+   
     background-color:white;
     width: 150%;
-    height: 100%;
-   
+   position: fixed;
+   z-index: 1;
 }
-#orderLabel{
-    display: inline-flex;
-    align-items: center;
-    font-style: bold;
-    font-size: 1.6em;
-    color: rgb(51, 25, 0);
-    padding-left: 0.5em;
-    padding-right: 1em;
-    padding-top: 1em;;
-}
-#clearLabel{
+
+#clearLabel {
     font-size: 0.8em;
     color: #c2c0c0;
     position: fixed;
@@ -422,18 +422,21 @@ header p {
     justify-content: center;
     align-items: center;
     align-self: flex-end;
-    margin-right:1em;
+    margin-right: 1em;
     padding-top: 0.3em;
     right: 0.6em;
     top: 2.4em;
-   cursor: pointer;
+    cursor: pointer;
+    z-index: 1000; /* Додатково: зберігайте елемент на передньому плані */
 }
-
-.pizzaCart{
-    display: flex;
+.orderPizzas{
+    top: 6em;
+    bottom: 8em;
     
+}
+.pizzaCart{
+   display: flex;
    width: 500%;
-   height: 500%;
    background-color: #F5F5F5;
    border-bottom: 1px solid lightgray;
    padding: 0.5em;
@@ -471,8 +474,8 @@ header p {
     gap: -0.2em;
     margin-bottom: 0.3em;
     margin-right: 4em;
-   
     width: 100px;
+    
 }
 .plusAndMinus{
     display: flex;
@@ -538,7 +541,6 @@ header p {
 }
 .orderText{
     position: fixed;
-
 }
 .panelForOrdering{
     position: fixed;
@@ -549,15 +551,14 @@ header p {
     
 }
 .orderText{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 1em;
-        padding-top: 2em;
-        padding-left: 1em;
-        background-color:white;
-        width: 200%;
-        height: 100%; 
-        
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding-top: 2em;
+    padding-left: 1em;
+    background-color:white;
+    width: 200%;
+    height: 100%; 
 }
 
 #orderButton{
@@ -598,6 +599,7 @@ header p {
     font-size: 1.2em;
     background-color: white;
 }
+
 .circle{
     margin-top: -0.9em;
     margin-left: 0.2em;
@@ -635,13 +637,13 @@ header p {
 }
 footer{
     background-color: #dad4d4;
-    height: 5em;
+    height: 10em;
     display: flex;
     justify-content: center;
     text-indent: 3em;
     color: rgb(68, 67, 67);
     width: 100%;
-    height: auto;
+    
     position: relative;
     box-sizing:border-box;
     padding: 2em;

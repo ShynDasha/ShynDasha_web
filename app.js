@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 filteredPizzas = filter === 'Усі' ? pizza_info : pizza_info.filter(pizza => pizza.type === filter);
                 break;
         }
-
+        document.querySelector('.all-pizza .quantity').textContent = filteredPizzas.length;
         // Створення елементів для відображення піц
         filteredPizzas.forEach(pizza => {
             const pizzaDiv = document.createElement('div');
