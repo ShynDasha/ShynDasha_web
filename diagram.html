@@ -15,7 +15,7 @@
     <button class="buttonBack"><a href="pizza.html">назад</a></button>
 
     <div id="wdr-component"></div>
-    <div id="google-chart" style="width: 600px; height: 500px;"></div>
+    <div id="google-chart" style="width: 800px; height: 500px;"></div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pivot = new WebDataRocks({
@@ -81,7 +81,7 @@
 
             updateWebDataRocks();
 
-            // Load the Google Charts Visualization API
+            
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
         });

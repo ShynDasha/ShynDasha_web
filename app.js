@@ -1,7 +1,6 @@
-//з таблицею
 document.addEventListener("DOMContentLoaded", (event) => {
-    const pizzaContainer = document.querySelector('#pizzas-wrapper');
-    const orderedPizzasContainer = document.querySelector('#orderedPizzasContainer');
+    const pizzaContainer = document.querySelector('#pizzas-wrapper'); // Контейнер для виведення піц
+    const orderedPizzasContainer = document.querySelector('#orderedPizzasContainer'); // Контейнер для замовлених піц
     const textContentClass = 'textContent';
     const pizzaHeaderClass = 'pizzaType';
     const pizzaTitle = 'pizzaTitle';
@@ -9,8 +8,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const ingredients = 'ingredients';
     let totalSum = 0;
 
-    let pizza_info = [];
+    let pizza_info = []; // Масив для збереження інформації про піци
 
+    // Завантаження даних про піци з файлу pizzas.json
     fetch('pizzas.json')
         .then(response => response.json())
         .then(data => {
@@ -19,10 +19,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         })
         .catch(error => console.error('Error loading pizza data:', error));
 
+    // Функція для рендерингу піц з фільтром
     function renderPizzas(filter = 'Усі') {
         pizzaContainer.innerHTML = '';
         let filteredPizzas = [];
 
+        // Фільтрація піц за вибраним фільтром
         switch (filter) {
             case 'З ананасами':
                 filteredPizzas = pizza_info.filter(pizza => pizza.content.pineapple && pizza.content.pineapple.length > 0);
@@ -38,13 +40,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 break;
         }
 
+        // Створення елементів для відображення піц
         filteredPizzas.forEach(pizza => {
             const pizzaDiv = document.createElement('div');
             pizzaDiv.className = 'pizza';
 
+            // Додавання значків "Нова" та "Популярна"
             const badgeNew = pizza.is_new ? `<p class="badge badge-new">Нова</p>` : '';
             const popularBadge = pizza.is_popular ? `<p class="badge badge-popular ${pizza.id >= 3 ? 'special' : ''}">Популярна</p>` : '';
 
+            // Опис малої піци
             const smallSize = pizza.small_size ? `
                 <div id="smallSize">  
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.small_size.size}</p>
@@ -53,6 +58,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <button class="buyButton"> ${buyText} </button>
                 </div>` : '';
 
+            // Опис великої піци
             const bigSize = pizza.big_size ? `
                 <div id="bigSize">
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.big_size.size}</p>
@@ -61,10 +67,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <button class="buyButton"> ${buyText}</button>
                 </div>` : '';
 
+            // Функція для капіталізації першого слова
             function capitalizeFirstWord(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             }
 
+            // Об'єднання всіх інгредієнтів в один рядок
             const combinedIngredients = [
                 ...pizza.content.meat || [],
                 ...pizza.content.chicken || [],
@@ -75,6 +83,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             const formattedIngredients = capitalizeFirstWord(combinedIngredients);
 
+            // Формування HTML структури піци
             const pizzaAll = `
                 ${badgeNew}
                 ${popularBadge}
@@ -97,9 +106,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             pizzaContainer.appendChild(pizzaDiv);
         });
 
-        setupBuyButtons();
+        setupBuyButtons(); // Налаштування кнопок "Купити"
     }
 
+    // Налаштування фільтрів
     document.querySelectorAll('#filter .select-decelect').forEach(button => {
         button.addEventListener('click', (event) => {
             document.querySelectorAll('#filter .select-decelect').forEach(btn => btn.classList.remove('active'));
@@ -108,6 +118,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
+    // Функція для налаштування кнопок "Купити"
     function setupBuyButtons() {
         document.querySelectorAll('.buyButton').forEach(button => {
             button.addEventListener('click', (event) => {
@@ -119,12 +130,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const icon = pizzaCard.querySelector('img').src;
                 const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
 
-                let existingPizza = orderedPizzas.find(pizza => pizza.title === pizzaTitle && pizza.size === size);
+                const sizeText = size === 30 ? ' (мала)' : ' (велика)';
+
+                // Перевірка, чи вже замовлено цю піцу
+                let existingPizza = orderedPizzas.find(pizza => pizza.title === pizzaTitle + sizeText && pizza.size === size);
                 if (existingPizza) {
                     existingPizza.amount++;
                 } else {
                     existingPizza = {
-                        title: pizzaTitle,
+                        title: pizzaTitle + sizeText,
                         weight,
                         size,
                         price,
@@ -134,19 +148,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     orderedPizzas.push(existingPizza);
                 }
 
-                updateLocalStorage(orderedPizzas);
-                renderOrderedPizzas();
-                updateTotalSum();
+                updateLocalStorage(orderedPizzas); // Оновлення локального сховища
+                renderOrderedPizzas(); // Відображення замовлених піц
+                updateTotalSum(); // Оновлення загальної суми
             });
         });
     }
 
+    // Ініціалізація сховища
     function setUpLocalStorage() {
         if (!localStorage.getItem('orderedPizzas')) {
             localStorage.setItem('orderedPizzas', JSON.stringify([]));
         }
     }
 
+    // Функція для відображення замовлених піц
     function renderOrderedPizzas() {
         const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
         orderedPizzasContainer.innerHTML = '';
@@ -186,6 +202,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
             orderedPizzasContainer.appendChild(orderedPizza);
 
+            // Налаштування кнопок для збільшення, зменшення та видалення піц
             const plusButton = orderedPizza.querySelector('.plus');
             const minusButton = orderedPizza.querySelector('.minus');
             const amountDisplay = orderedPizza.querySelector('.amount');
@@ -212,64 +229,44 @@ document.addEventListener("DOMContentLoaded", (event) => {
             });
 
             orderedPizza.querySelector('.delete').addEventListener('click', () => {
+                // Видалення піци з масиву orderedPizzas
                 orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
-                updateLocalStorage(orderedPizzas);
-                renderOrderedPizzas();
-                updateTotalSum();
+                updateLocalStorage(orderedPizzas); // Оновлення локального сховища
+                renderOrderedPizzas(); // Повторне відображення замовлених піц
+                updateTotalSum(); // Оновлення загальної суми
             });
+            
         });
 
-        updateTotalSum();
+        updateTotalSum(); // Оновлення загальної суми
     }
 
+    // Оновлення даних у локальному сховищі
     function updateLocalStorage(orderedPizzas) {
         localStorage.setItem('orderedPizzas', JSON.stringify(orderedPizzas));
     }
 
+    // Оновлення загальної суми
     function updateTotalSum() {
         const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
         totalSum = orderedPizzas.reduce((sum, pizza) => sum + pizza.price * pizza.amount, 0);
         document.querySelector('#sumOfAll').textContent = `${totalSum} грн`;
     }
 
-    setUpLocalStorage();
-    renderOrderedPizzas();
+    setUpLocalStorage(); // Ініціалізація локального сховища
+    renderOrderedPizzas(); // Відображення замовлених піц
 
+    // Очищення замовлень
     document.querySelector('#clearLabel').addEventListener('click', () => {
         localStorage.setItem('orderedPizzas', JSON.stringify([]));
         renderOrderedPizzas();
     });
 
-    // Ініціалізація WebDataRocks
-    const pivot = new WebDataRocks({
-        container: "#wdr-component",
-        toolbar: true,
-        report: {
-            dataSource: {
-                filename: "orderedPizzas.json"
-            },
-            slice: {
-                rows: [
-                    {
-                        uniqueName: "title"
-                    },
-                   
-                ],
-                measures: [
-                    {
-                        uniqueName: "amount",
-                        aggregation: "sum"
-                    }
-                ]
-            }
-        }
-    });
-
+    // Оновлення даних для WebDataRocks
     function updateWebDataRocks() {
         const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
         const pivotData = orderedPizzas.map(pizza => ({
             title: pizza.title,
-           
             amount: pizza.amount
         }));
 
@@ -278,7 +275,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    pivot.on("reportcomplete", updateWebDataRocks);
-    updateWebDataRocks();
+    pivot.on("reportcomplete", updateWebDataRocks); // Оновлення даних при завершенні звіту
+    updateWebDataRocks(); // Початкове оновлення даних
 
 });

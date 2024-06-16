@@ -6,7 +6,6 @@ body {
     overflow: auto;
 }
     
-
 .container{
     display: grid;
     grid-template-columns: 75% 25%;
@@ -256,8 +255,8 @@ header p {
     margin-top: 0.2em;
     margin-left: 0.2em;
     border-radius: 50%; 
-    width: 1.5em; 
-    height: 1.5em; 
+    width: 1.6em; 
+    height: 1.3em; 
     font-size: 0.6em;
     background-color: #EC861C;
     display: inline-flex; 
@@ -334,7 +333,6 @@ header p {
 }
 #priceUA{
     font-size: 14px;
-
 }
 
 .buyButton{
@@ -369,26 +367,27 @@ header p {
     padding-bottom: 1em;
     margin-bottom: 1em;
 }
-
-.picSize,
-.Weight{
-    margin-left: 1em;
-    margin-top: -5px;
+.picSize{
+    margin-left: 1.2em;
 }
 #price{
     font-size: 28px;
-    margin-left: 0.6em;
+    margin-left: 0.5em;
     font-weight:lighter
+}
+/* права частина ------------------------------------------------------------------------------------------------*/
+.right-block{
+    background-color: #F5F5F5;
 }
 
 .panelForOrdering{
     position: fixed;
 }
-.orderPizzas{
+.orderedPizzas{
     background-color: #F5F5F5 ;
     height: 100%;
 }
-#head-label{
+#boughtPanel{
     position: fixed;
 }
 .order{
@@ -396,25 +395,26 @@ header p {
     justify-content: space-between;
     gap: 3em;
     margin-bottom: 1em;
+   
     padding-top: 0.5em;
-    padding-right: 10em;
+    padding-right: 1em;
     padding-bottom: 1.5em;
     background-color:white;
     width: 150%;
-    height: 65px;
+    height: 100%;
+   
 }
-.orderLabel{
+#orderLabel{
     display: inline-flex;
     align-items: center;
     font-style: bold;
-    font-size: 1.2em;
+    font-size: 1.6em;
     color: rgb(51, 25, 0);
     padding-left: 0.5em;
-    padding-right: 2em;
+    padding-right: 1em;
     padding-top: 1em;;
-
 }
-.cancel-order{
+#clearLabel{
     font-size: 0.8em;
     color: #c2c0c0;
     position: fixed;
@@ -425,8 +425,213 @@ header p {
     margin-right:1em;
     padding-top: 0.3em;
     right: 0.6em;
-    top: 3em;
+    top: 2.4em;
    cursor: pointer;
+}
+
+.pizzaCart{
+    display: flex;
+    
+   width: 500%;
+   height: 500%;
+   background-color: #F5F5F5;
+   border-bottom: 1px solid lightgray;
+   padding: 0.5em;
+}
+.imgPizzaCart{
+    height:auto;
+    max-width: 9em;
+    position: relative;
+    right:-7em;  
+    z-index: 1;
+     
+}
+.info{
+    margin: 0.5em;
+    margin-right:0;
+    padding-bottom: 0.9em;
+    padding-top: 0.9em;
+}
+.sizeAndWeight{
+    display: flex;
+    gap:1.5em;
+}
+.sizeCart,
+.weightCart{
+    display: flex;
+    position: relative;
+    justify-content: start;
+    left:0;
+    margin-top: 0.2em;
+}
+.functionalPanel,
+.buttonsAmount {
+    display: flex;
+    justify-content: space-between;
+    gap: -0.2em;
+    margin-bottom: 0.3em;
+    margin-right: 4em;
+   
+    width: 100px;
+}
+.plusAndMinus{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+.delete,
+.amount,
+.sum {
+  
+   margin-top: 0.5em;
+}
+.amount{
+    margin-right: 0.1em;
+}
+.plus,
+.minus,
+.delete {
+    border-radius: 3em;
+    width: 1.6em;
+    height: 1.6em;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0em;
+    margin-top:0.2em;
+}
+.plus,
+.minus{
+    color: white;
+}
+.delete{
+    color: orange;
+    background: #c4c2c06b;
+    border: 0.5px solid rgb(30, 0, 0);
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-left: 0.5em;
+    cursor: pointer;
+}
+
+.minus {
+    background-color: #dc3545;
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.plus {
+    background-color: #28a745;
+    cursor: pointer;
+}
+.plus:active,
+.minus:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0);
+}
+
+.pizzaCart label {
+    color: orange;
+    font-size: 16px;
+    font-weight: 200;
+}
+.orderText{
+    position: fixed;
+
+}
+.panelForOrdering{
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    bottom: 8em;
+    display: block;
+    
+}
+.orderText{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1em;
+        padding-top: 2em;
+        padding-left: 1em;
+        background-color:white;
+        width: 200%;
+        height: 100%; 
+        
+}
+
+#orderButton{
+   position: fixed;
+   bottom: 0;
+   width: 20%;
+   margin: 0;
+   margin-bottom: 2em;
+   margin-top: 2em;
+   margin-left: 3em;
+   margin-right: 0.5em;
+   border: 0.5px solid rgb(255, 132, 0);
+
+ }
+.buyButton{
+    margin-right: 2em;
+}
+#sumOfAll{
+    font-weight: bold;
+    font-size: 1.1em;
+    color: rgb(51, 25, 0);
+    padding-right: 1em;
+    position: fixed;
+    right:0;
+}
+.orderedPizzas,
+.pizzaCart {
+    max-height: 60em;
+    padding: 0;
+    margin: 0;
+   
+     overflow-x: scroll; /* Enables vertical scrolling */
+}
+.orderLabel{
+    padding-left: 1em;
+    padding-bottom: 1em;
+    margin-top: 1.2em;
+    font-size: 1.2em;
+    background-color: white;
+}
+.circle{
+    margin-top: -0.9em;
+    margin-left: 0.2em;
+    border-radius: 50%; 
+    width: 1.6em; 
+    height: 1.3em; 
+    font-size: 0.7em;
+    background-color: #EC861C;
+    display: inline-flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: white; 
+}
+
+/* нижня ліва частина та media ----------------------------------------------------------------------------------------------*/
+.more{
+    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
+    font-weight: bold;
+    color: white;
+    padding: 3px;
+    font-size: 0.8em;
+    height: 3em;
+    width: 10em;
+    border: 0;
+    border-radius: 0.4em;
+    
+    margin-left: 3em;
+    margin-top: 2em;
+    transition: background-image 0.3s ease;
+}
+.more:hover{
+    font-weight: bold;
+    background-image: linear-gradient(rgb(252, 197, 107), rgb(250, 187, 87));
+    cursor: pointer;
 }
 footer{
     background-color: #dad4d4;
@@ -581,183 +786,4 @@ footer{
     #orderButton{
        margin-left: 2.5em;
     }
-}
-
-.pizzaOrd{
-   display: flex;
-   width: 500%;
-   height: 500%;
-   background-color: #F5F5F5;
-
-   border-bottom: 1px solid lightgray;
-   padding: 0.5em;
-   
-}
-.imgPizzaCart{
-    height:auto;
-    max-width: 10em;
-    position: absolute;
-    margin-top: -1em;
-    right:-4em;  
-    z-index: 0;
-   
-}
-.info{
-    margin: 0.5em;
-    margin-right:0;
-    padding-bottom: 0.9em;
-    padding-top: 0.9em;
-}
-.sizeAndWeight{
-    display: flex;
-    gap:1.5em;
-}
-.sizeCart,
-.weightCart{
-    display: flex;
-    position: relative;
-    justify-content: start;
-    left:0;
-    margin-top: 0.2em;
-}
-.functionalPanel,
-.buttonsA {
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    margin-bottom: 0.3em;
-    margin-right: 4em;
-   
-    width: 100px;
-}
-.plusAndMinus{
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5em;
-}
-.delete,
-.amount,
-.sumP {
-   margin-top: 0.5em;
-}
-
-.amount{
-    margin-right: 0.1em;
-    margin-top:-4px;
-}
-.plus,
-.minus,
-.delete {
-    border-radius: 3em;
-    width: 1.6em;
-    height: 1.6em;
-    border: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.3em;
-    margin-top:-0.3em;
-}
-.plus,
-.minus{
-    color: white;
-}
-.delete{
-    color: orange;
-    background:#c4c2c06b;
-    border: 0.5px solid rgb(30, 0, 0);
-   
-    margin-top: -1.em;
-}
-
-.minus {
-    background-color: #dc3545;
-    cursor: pointer;
-}
-
-.plus {
-    background-color: #28a745;
-    cursor: pointer;
-}
-.plus:active,
-.minus:active{
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0); 
-}
-.pizzaOrd label {
-    color: orange;
-    font-size: 1.3em;
-    font-weight: 200;
-}
-.orderText{
-    position: fixed;
-}
-
-.panelForOrdering{
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    bottom: 8em;
-    display: block;
-    
-}
-.orderText{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 1em;
-        padding-top: 2em;
-        padding-left: 1em;
-        background-color:white;
-        width: 200%;
-        height: 100%;  
-}
-#sumOfAll{
-    font-weight: bold;
-    font-size: 1.1em;
-    color: rgb(51, 25, 0);
-    padding-right: 1em;
-    position: fixed;
-    right:0;
-}
-
-#orderButton{
-   position: fixed;
-   bottom: 0;
-   width: 20%;
-   margin: 0;
-   margin-bottom: 2em;
-   margin-top: 2em;
-   margin-left: 3em;
-   margin-right: 0.5em;
-   border: 0.5px solid rgb(255, 132, 0);
-}
-.buyButton{
-    margin-right: 2em;
-}
-.orderPizzas,
-.pizzaCart {
-    max-height: 60em;
-    padding: 0;
-    padding-top: 3em;
-    margin: 0;
-}
-.more{
-    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
-    font-weight: bold;
-    color: white;
-    padding: 3px;
-    font-size: 0.8em;
-    height: 3em;
-    width: 10em;
-    border: 0;
-    border-radius: 0.4em;
-    
-    margin-left: 3em;
-    margin-top: 2em;
-    transition: background-image 0.3s ease;
-}
-.more:hover{
-    font-weight: bold;
-    background-image: linear-gradient(rgb(252, 197, 107), rgb(250, 187, 87));
-    cursor: pointer;
 }
