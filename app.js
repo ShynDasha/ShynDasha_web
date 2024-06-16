@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         pizzaContainer.innerHTML = '';
         let filteredPizzas = [];
 
-        // Фільтрація піц за вибраним фільтром
+        // Фільтрація піц за категоріями
         switch (filter) {
             case 'З ананасами':
                 filteredPizzas = pizza_info.filter(pizza => pizza.content.pineapple && pizza.content.pineapple.length > 0);
@@ -45,11 +45,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const pizzaDiv = document.createElement('div');
             pizzaDiv.className = 'pizza';
 
-            // Додавання значків "Нова" та "Популярна"
+            // значки "Нова" та "Популярна"
             const badgeNew = pizza.is_new ? `<p class="badge badge-new">Нова</p>` : '';
             const popularBadge = pizza.is_popular ? `<p class="badge badge-popular ${pizza.id >= 3 ? 'special' : ''}">Популярна</p>` : '';
 
-            // Опис малої піци
+            // маленькі піци
             const smallSize = pizza.small_size ? `
                 <div id="smallSize">  
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.small_size.size}</p>
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <button class="buyButton"> ${buyText} </button>
                 </div>` : '';
 
-            // Опис великої піци
+            //  великі піци
             const bigSize = pizza.big_size ? `
                 <div id="bigSize">
                     <p><img src="size-icon.svg" class="picSize"/>${pizza.big_size.size}</p>
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <button class="buyButton"> ${buyText}</button>
                 </div>` : '';
 
-            // Функція для капіталізації першого слова
+            // Функція для додавання розміру
             function capitalizeFirstWord(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             }
@@ -105,7 +105,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             pizzaDiv.innerHTML = pizzaAll;
             pizzaContainer.appendChild(pizzaDiv);
         });
-
         setupBuyButtons(); // Налаштування кнопок "Купити"
     }
 
@@ -147,10 +146,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     orderedPizzas.push(existingPizza);
                 }
             
-                updateLocalStorage(orderedPizzas);
-                renderOrderedPizzas();
-                updateTotalSum();
-                updatePizzaCount(); // Додайте цей виклик
+                updateLocalStorage(orderedPizzas); // оновлення даних
+                renderOrderedPizzas(); //  обрані
+                updateTotalSum(); // загальна сума
+                updatePizzaCount(); // rskmrscnm
             });
             
         });
@@ -218,7 +217,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 amountDisplay.textContent = pizza.amount;
                 updateLocalStorage(orderedPizzas);
                 updateTotalSum();
-                updatePizzaCount(); // Додайте цей виклик
+                updatePizzaCount(); 
             });
 
             minusButton.addEventListener('click', () => {
@@ -227,31 +226,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     amountDisplay.textContent = pizza.amount;
                     updateLocalStorage(orderedPizzas);
                     updateTotalSum();
-                    updatePizzaCount(); // Додайте цей виклик
+                    updatePizzaCount(); 
                 } else if (pizza.amount === 1) {
                     orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
                     updateLocalStorage(orderedPizzas);
                     renderOrderedPizzas();
                     updateTotalSum();
-                    updatePizzaCount(); // Додайте цей виклик
+                    updatePizzaCount();
                 }
             });
 
             orderedPizza.querySelector('.delete').addEventListener('click', () => {
-                // Видалення піци з масиву orderedPizzas
+                // Видалення піци з orderedPizzas
                 orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
-                updateLocalStorage(orderedPizzas); // Оновлення локального сховища
-                renderOrderedPizzas(); // Повторне відображення замовлених піц
-                updateTotalSum(); // Оновлення загальної суми
+                updateLocalStorage(orderedPizzas); // Оновлення даних
+                renderOrderedPizzas(); // відображення замовлених піц
+                updateTotalSum(); //  загальна суми
                 updatePizzaCount(); 
             });
             
         });
 
-        updateTotalSum(); // Оновлення загальної суми
+        updateTotalSum(); // загальна суми
     }
 
-    // Оновлення даних у локальному сховищі
+    // Оновлення даних 
     function updateLocalStorage(orderedPizzas) {
         localStorage.setItem('orderedPizzas', JSON.stringify(orderedPizzas));
     }
@@ -263,7 +262,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector('#sumOfAll').textContent = `${totalSum} грн`;
     }
 
-    setUpLocalStorage(); // Ініціалізація локального сховища
+    setUpLocalStorage(); // Ініціалізація LocalStorage
     renderOrderedPizzas(); // Відображення замовлених піц
     updatePizzaCount();
 
@@ -271,9 +270,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.querySelector('#clearLabel').addEventListener('click', () => {
         localStorage.setItem('orderedPizzas', JSON.stringify([]));
         renderOrderedPizzas();
+        updatePizzaCount(); 
     });
 
-    // Оновлення даних для WebDataRocks
+    // Оновлення даних для табл WebDataRocks
     function updateWebDataRocks() {
         const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
         const pivotData = orderedPizzas.map(pizza => ({
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    pivot.on("reportcomplete", updateWebDataRocks); // Оновлення даних при завершенні звіту
-    updateWebDataRocks(); // Початкове оновлення даних
+    pivot.on("reportcomplete", updateWebDataRocks); 
+    updateWebDataRocks(); //  оновлення даних
 
 });
