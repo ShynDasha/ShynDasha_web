@@ -1,0 +1,26 @@
+ .container{
+    background-color: rgb(254, 249, 244);
+ }
+.buttonBack{
+    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
+    font-weight: bold;
+    color: white;
+    padding: 3px;
+    font-size: 0.8em;
+    height: 3em;
+    width: 10em;
+    border: 0;
+    border-radius: 0.4em;
+    margin-left: 3em;
+    margin-top: 2em;
+    transition: background-image 0.3s ease;
+}
+.buttonBack:hover{
+    font-weight: bold;
+    background-image: linear-gradient(rgb(252, 197, 107), rgb(250, 187, 87));
+    cursor: pointer;
+}
+#google-chart{
+    margin-left: 42em;
+    margin-top: -30em;
+}
