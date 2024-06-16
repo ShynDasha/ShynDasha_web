@@ -384,7 +384,7 @@ header p {
     max-height: 80vh; /* Встановіть потрібну максимальну висоту */
     overflow-y: auto; /* Додайте вертикальну прокрутку */
     overflow-x: hidden;
-    width: 400px; 
+    width: 500px; 
     
 }
 .panelForOrdering{
@@ -600,7 +600,7 @@ header p {
     background-color: white;
 }
 
-.circle{
+#circle{
     margin-top: -0.9em;
     margin-left: 0.2em;
     border-radius: 50%; 

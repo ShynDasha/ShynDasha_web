@@ -129,10 +129,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const price = parseInt(event.target.previousElementSibling.innerText, 10);
                 const icon = pizzaCard.querySelector('img').src;
                 const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
-
+            
                 const sizeText = size === 30 ? ' (мала)' : ' (велика)';
-
-                // Перевірка, чи вже замовлено цю піцу
+            
                 let existingPizza = orderedPizzas.find(pizza => pizza.title === pizzaTitle + sizeText && pizza.size === size);
                 if (existingPizza) {
                     existingPizza.amount++;
@@ -147,11 +146,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     };
                     orderedPizzas.push(existingPizza);
                 }
-
-                updateLocalStorage(orderedPizzas); // Оновлення локального сховища
-                renderOrderedPizzas(); // Відображення замовлених піц
-                updateTotalSum(); // Оновлення загальної суми
+            
+                updateLocalStorage(orderedPizzas);
+                renderOrderedPizzas();
+                updateTotalSum();
+                updatePizzaCount(); // Додайте цей виклик
             });
+            
         });
     }
 
@@ -162,6 +163,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     }
 
+    function updatePizzaCount() {
+        const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+        const pizzaCount = orderedPizzas.reduce((count, pizza) => count + pizza.amount, 0);
+        document.querySelector('#circle').textContent = pizzaCount;
+    }
     // Функція для відображення замовлених піц
     function renderOrderedPizzas() {
         const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
@@ -212,6 +218,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 amountDisplay.textContent = pizza.amount;
                 updateLocalStorage(orderedPizzas);
                 updateTotalSum();
+                updatePizzaCount(); // Додайте цей виклик
             });
 
             minusButton.addEventListener('click', () => {
@@ -220,11 +227,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     amountDisplay.textContent = pizza.amount;
                     updateLocalStorage(orderedPizzas);
                     updateTotalSum();
+                    updatePizzaCount(); // Додайте цей виклик
                 } else if (pizza.amount === 1) {
                     orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
                     updateLocalStorage(orderedPizzas);
                     renderOrderedPizzas();
                     updateTotalSum();
+                    updatePizzaCount(); // Додайте цей виклик
                 }
             });
 
@@ -234,6 +243,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 updateLocalStorage(orderedPizzas); // Оновлення локального сховища
                 renderOrderedPizzas(); // Повторне відображення замовлених піц
                 updateTotalSum(); // Оновлення загальної суми
+                updatePizzaCount(); 
             });
             
         });
@@ -255,6 +265,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     setUpLocalStorage(); // Ініціалізація локального сховища
     renderOrderedPizzas(); // Відображення замовлених піц
+    updatePizzaCount();
 
     // Очищення замовлень
     document.querySelector('#clearLabel').addEventListener('click', () => {
