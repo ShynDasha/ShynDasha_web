@@ -167,88 +167,93 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const pizzaCount = orderedPizzas.reduce((count, pizza) => count + pizza.amount, 0);
         document.querySelector('#circle').textContent = pizzaCount;
     }
-    // Функція для відображення замовлених піц
-    function renderOrderedPizzas() {
-        const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
-        orderedPizzasContainer.innerHTML = '';
+// Функція для відображення замовлених піц
+function renderOrderedPizzas() {
+    const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+    orderedPizzasContainer.innerHTML = '';
 
-        orderedPizzas.forEach(pizza => {
-            const orderedPizza = document.createElement('div');
-            orderedPizza.className = 'pizzaCart';
-            orderedPizza.innerHTML = `
-                <div class="info">  
-                    <label for="pizaCart">${pizza.title}</label>
-                    <div class="sizeAndWeight">
-                        <div class="sizeCart">
-                            <img class="imgSize" src="size-icon.svg"/>
-                            <p class="sizeNumber">${pizza.size}</p>
+    orderedPizzas.forEach(pizza => {
+        const orderedPizza = document.createElement('div');
+        orderedPizza.className = 'pizzaCart';
+        orderedPizza.innerHTML = `
+            <div class="info">  
+                <label for="pizaCart">${pizza.title}</label>
+                <div class="sizeAndWeight">
+                    <div class="sizeCart">
+                        <img class="imgSize" src="size-icon.svg"/>
+                        <p class="sizeNumber">${pizza.size}</p>
+                    </div>
+                    <div class="weightCart">
+                        <img class="imgSize" src="weight.svg"/>
+                        <p class="sizeNumber">${pizza.weight}</p>
+                    </div>
+                </div>    
+                <div class="functionalPanel">
+                    <div class="sum">
+                        <b class="totalPizzaSum">${pizza.price * pizza.amount} грн</b> 
+                    </div>
+                    <div class="buttonsAmount">
+                        <div class="plusAndMinus">
+                            <div class="minus">-</div>
+                            <div class="amount">${pizza.amount}</div>
+                            <div class="plus">+</div>
                         </div>
-                        <div class="weightCart">
-                            <img class="imgSize" src="weight.svg"/>
-                            <p class="sizeNumber">${pizza.weight}</p>
-                        </div>
-                    </div>    
-                    <div class="functionalPanel">
-                        <div class="sum"><b>${pizza.price}грн</b></div>
-                        <div class="buttonsAmount">
-                            <div class="plusAndMinus">
-                                <div class="minus">-</div>
-                                <div class="amount">${pizza.amount}</div>
-                                <div class="plus">+</div>
-                            </div>
-                            <div class="delete"><b>x</b></div>
-                        </div>
+                        <div class="delete"><b>x</b></div>
                     </div>
                 </div>
-                <div class="imgCart">
-                    <img src="${pizza.icon}" alt="${pizza.title}" class="imgPizzaCart">
-                </div>
-            `;
+            </div>
+            <div class="imgCart">
+                <img src="${pizza.icon}" alt="${pizza.title}" class="imgPizzaCart">
+            </div>
+        `;
 
-            orderedPizzasContainer.appendChild(orderedPizza);
+        orderedPizzasContainer.appendChild(orderedPizza);
 
-            // Налаштування кнопок для збільшення, зменшення та видалення піц
-            const plusButton = orderedPizza.querySelector('.plus');
-            const minusButton = orderedPizza.querySelector('.minus');
-            const amountDisplay = orderedPizza.querySelector('.amount');
+        // Налаштування кнопок для збільшення, зменшення та видалення піц
+        const plusButton = orderedPizza.querySelector('.plus');
+        const minusButton = orderedPizza.querySelector('.minus');
+        const amountDisplay = orderedPizza.querySelector('.amount');
+        const totalPizzaSumDisplay = orderedPizza.querySelector('.totalPizzaSum'); // Виправлено
 
-            plusButton.addEventListener('click', () => {
-                pizza.amount++;
+        plusButton.addEventListener('click', () => {
+            pizza.amount++;
+            amountDisplay.textContent = pizza.amount;
+            totalPizzaSumDisplay.textContent = `${pizza.price * pizza.amount} грн`; // Оновлення загальної суми
+            updateLocalStorage(orderedPizzas);
+            updateTotalSum();
+            updatePizzaCount(); 
+        });
+
+        minusButton.addEventListener('click', () => {
+            if (pizza.amount > 1) {
+                pizza.amount--;
                 amountDisplay.textContent = pizza.amount;
+                totalPizzaSumDisplay.textContent = `${pizza.price * pizza.amount} грн`; // Оновлення загальної суми
                 updateLocalStorage(orderedPizzas);
                 updateTotalSum();
                 updatePizzaCount(); 
-            });
-
-            minusButton.addEventListener('click', () => {
-                if (pizza.amount > 1) {
-                    pizza.amount--;
-                    amountDisplay.textContent = pizza.amount;
-                    updateLocalStorage(orderedPizzas);
-                    updateTotalSum();
-                    updatePizzaCount(); 
-                } else if (pizza.amount === 1) {
-                    orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
-                    updateLocalStorage(orderedPizzas);
-                    renderOrderedPizzas();
-                    updateTotalSum();
-                    updatePizzaCount();
-                }
-            });
-
-            orderedPizza.querySelector('.delete').addEventListener('click', () => {
-                // Видалення піци з orderedPizzas
+            } else if (pizza.amount === 1) {
                 orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
-                updateLocalStorage(orderedPizzas); // Оновлення даних
-                renderOrderedPizzas(); // відображення замовлених піц
-                updateTotalSum(); //  загальна суми
-                updatePizzaCount(); 
-            });
-            
+                updateLocalStorage(orderedPizzas);
+                renderOrderedPizzas();
+                updateTotalSum();
+                updatePizzaCount();
+            }
         });
 
-        updateTotalSum(); // загальна суми
-    }
+        orderedPizza.querySelector('.delete').addEventListener('click', () => {
+            // Видалення піци з orderedPizzas
+            orderedPizzas.splice(orderedPizzas.indexOf(pizza), 1);
+            updateLocalStorage(orderedPizzas); // Оновлення даних
+            renderOrderedPizzas(); // відображення замовлених піц
+            updateTotalSum(); // загальна суми
+            updatePizzaCount(); 
+        });
+    });
+
+    updateTotalSum(); // загальна суми
+}
+
 
     // Оновлення даних 
     function updateLocalStorage(orderedPizzas) {

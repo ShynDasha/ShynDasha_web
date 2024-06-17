@@ -12,16 +12,36 @@
 </head>
 <body>
     <div class="container">
-    <button class="buttonBack"><a href="pizza.html">назад</a></button>
-
+        <section id="PizzaKma">
+            PIZZA KMA
+            <div class="triangle triangle1"></div>
+            <div class="triangle triangle2"></div>
+        </section>
+    <header>
+        <section class="information">
+            <section class="contact">
+                <div>
+                    <p id="phone">(044) 222 5 222</p>
+                    <p id="schedule">24 години / 7 днів на тиждень</p>
+                    <p id="delivery">Безкоштовна доставка піци</p>
+                </div>
+                <button class="exitButton"><a href="pizza.html">Назад</a></button>
+            </section>
+            <section class="information-row">
+                <p id="pizza-label">Піца</p>
+            </section>
+        </section>
+    </header>
     <div id="wdr-component"></div>
     <div id="google-chart" style="width: 800px; height: 500px;"></div>
+    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pivot = new WebDataRocks({
                 container: "#wdr-component",
                 width: 600,
                 height: 500,
+                
                 toolbar: true,
                 report: {
                     dataSource: {
@@ -37,6 +57,7 @@
                             {
                                 uniqueName: "amount",
                                 aggregation: "sum"
+                            
                             }
                         ]
                     }
@@ -86,6 +107,7 @@
             google.charts.setOnLoadCallback(drawChart);
         });
     </script>
+   
    </div>
 </body>
 </html>

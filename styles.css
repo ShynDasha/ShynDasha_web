@@ -1,19 +1,11 @@
- .container{
+body{
     background-color: rgb(254, 249, 244);
- }
-.buttonBack{
-    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
-    font-weight: bold;
-    color: white;
-    padding: 3px;
-    font-size: 0.8em;
-    height: 3em;
-    width: 10em;
-    border: 0;
-    border-radius: 0.4em;
-    margin-left: 3em;
-    margin-top: 2em;
-    transition: background-image 0.3s ease;
+}
+#wdr-component{
+    padding-top: 8em;
+}
+#google-chart{
+    padding-top: 5em;
 }
 .buttonBack:hover{
     font-weight: bold;
@@ -23,4 +15,181 @@
 #google-chart{
     margin-left: 42em;
     margin-top: -30em;
+}
+header {
+    background-color: rgba(42, 36, 36, 0.8);
+    color: rgb(188, 180, 188);
+    padding: 1em;
+    margin-right: 0;
+    padding-left: 10em;
+    padding-top: 1px;
+    position: fixed;
+    box-sizing: border-box;
+    margin-bottom: 2em;
+    width:100%;
+    height: 95px;
+    z-index: 3;
+}
+
+.badge {
+    top: 3em;
+    position:relative;
+    display: inline;
+    margin: 5px;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    z-index: 100;
+    height: 2em;
+    text-align: center;
+    justify-content: center;
+    font-style: bold;
+    font-weight: 100;
+    z-index: 1;
+}
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    border-bottom: 1px solid rgb(188, 188, 188);
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 1em;
+    padding-bottom: 0;
+
+   
+}
+.contact div {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.exitButton{
+    background-image: linear-gradient(rgb(235, 185, 105), rgb(241, 149, 0));
+    font-weight: bold;
+    color: white;
+    padding: 3px;
+    font-size: 0.8em;
+    height: 3em;
+    width: 10em;
+    border: 0;
+    border-radius: 0.4em;
+    
+    margin-left: 3em;
+    margin-top: 2em;
+    transition: background-image 0.3s ease;
+}
+.exitButton:hover{
+    font-weight: bold;
+    background-image: linear-gradient(rgb(252, 197, 107), rgb(250, 187, 87));
+    cursor: pointer;
+}
+header p {
+    padding: 0;
+    cursor: pointer;
+    font-weight: 300;
+}
+#PizzaKma {
+    background-color: #EC861C;
+    color: white;
+    text-align: center;
+    padding: 0.7em;
+    font-weight: bold;
+    cursor: pointer;
+    height: -2em;
+    width: 5em;
+    margin-left: 1em;
+    padding-top: 2em;
+    z-index: 10;
+    position: fixed;
+}
+
+
+.triangle1, .triangle2, .triangle3, .triangle4 {
+    width: 1;
+    height: 1;
+    position: absolute;
+}
+
+.triangle1 {
+    border-left: 102.5px solid transparent;
+    border-right: 0px solid transparent;
+    bottom: -1em;
+    border-top: 20px solid #EC861C;
+    left: 0;
+}
+
+.triangle2 {
+    border-right: 102.5px solid transparent;
+    border-left: 0px solid transparent;
+    bottom: -1em;
+    border-top: 20px solid #EC861C;
+    right: 0;
+}
+
+.triangle3 {
+    border-left: 102.5px solid transparent;
+    border-right: 0px solid transparent;
+    top: -1em;
+    border-bottom: 20px solid #EC861C;
+    left: 0;
+}
+
+.triangle4 {
+    border-right: 102.5px solid transparent;
+    border-left: 0px solid transparent;
+    top: -1em;
+    border-bottom: 20px solid #EC861C;
+    right: 0;
+}
+
+#PizzaKma:hover {
+    border-left:2px  #EC861C;
+    border-top:2px solid #EC861C; ;
+}
+.information-row{
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: left;
+   
+}
+#PizzaKma {
+    background-color: #EC861C;
+    color: white;
+    text-align: center;
+    padding: 0.7em;
+    font-weight: bold;
+    cursor: pointer;
+    height: 6em;
+    width: 6.3em;
+    margin-left: 1em;
+    padding-top: 2em;
+    z-index: 10;
+    position: fixed;
+}
+
+
+.triangle1, .triangle2, .triangle3, .triangle4 {
+    width: 1;
+    height: 1;
+    position: absolute;
+}
+
+.triangle1 {
+    border-left: 102.5px solid transparent;
+    border-right: 0px solid transparent;
+    bottom: -1em;
+    border-top: 20px solid #EC861C;
+    left: 0;
+}
+
+.triangle2 {
+    border-right: 102.5px solid transparent;
+    border-left: 0px solid transparent;
+    bottom: -1em;
+    border-top: 20px solid #EC861C;
+    right: 0;
 }

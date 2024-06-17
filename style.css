@@ -189,7 +189,6 @@ header p {
     right: 0;
 }
 
-
 #PizzaKma:hover {
     border-left:2px  #EC861C;
     border-top:2px solid #EC861C; ;
@@ -381,8 +380,9 @@ header p {
 }
 #orderedPizzasContainer{
     position: fixed;
-    max-height: 80vh; /* Встановіть потрібну максимальну висоту */
-    overflow-y: auto; /* Додайте вертикальну прокрутку */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    max-height: 80vh; 
+    overflow-y: auto;
     overflow-x: hidden;
     width: 500px; 
     
