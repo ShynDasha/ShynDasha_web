@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pizza KMA Statistics</title>
+    <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet"/>
+    <script src="https://cdn.webdatarocks.com/latest/webdatarocks.toolbar.min.js"></script>
+    <script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <section id="PizzaKma">
+            PIZZA KMA
+            <div class="triangle triangle1"></div>
+            <div class="triangle triangle2"></div>
+        </section>
+    <header>
+        <section class="information">
+            <section class="contact">
+                <div>
+                    <p id="phone">(044) 222 5 222</p>
+                    <p id="schedule">24 години / 7 днів на тиждень</p>
+                    <p id="delivery">Безкоштовна доставка піци</p>
+                </div>
+                <button class="exitButton"><a href="pizza.html">Назад</a></button>
+            </section>
+            <section class="information-row">
+                <p id="pizza-label">Піца</p>
+            </section>
+        </section>
+    </header>
+    <div id="wdr-component"></div>
+    <div id="google-chart" style="width: 800px; height: 500px;"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pivot = new WebDataRocks({
+                container: "#wdr-component",
+                width: 600,
+                height: 500,
+                
+                toolbar: true,
+                report: {
+                    dataSource: {
+                        filename: "orderedPizzas.json"
+                    },
+                    slice: {
+                        rows: [
+                            {
+                                uniqueName: "title"
+                            }
+                        ],
+                        measures: [
+                            {
+                                uniqueName: "amount",
+                                aggregation: "sum"
+                            
+                            }
+                        ]
+                    }
+                }
+            });
+
+            function updateWebDataRocks() {
+                const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+                const pivotData = orderedPizzas.map(pizza => ({
+                    title: pizza.title,
+                    amount: pizza.amount
+                }));
+
+                pivot.updateData({
+                    data: pivotData
+                });
+            }
+
+            function drawChart() {
+                const orderedPizzas = JSON.parse(localStorage.getItem('orderedPizzas')) || [];
+                const data = new google.visualization.DataTable();
+                data.addColumn('string', 'Pizza');
+                data.addColumn('number', 'Amount');
+
+                orderedPizzas.forEach(pizza => {
+                    data.addRow([pizza.title, pizza.amount]);
+                });
+
+                const options = {
+                    title: 'Ordered Pizzas',
+                    is3D: true
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('google-chart'));
+                chart.draw(data, options);
+            }
+
+            pivot.on("reportcomplete", () => {
+                updateWebDataRocks();
+                drawChart();
+            });
+
+            updateWebDataRocks();
+
+            
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+        });
+    </script>
+   
+   </div>
+</body>
+</html>

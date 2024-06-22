@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza KMA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="left-block">
+        <section id="PizzaKma">
+            PIZZA KMA
+            <div class="triangle triangle1"></div>
+            <div class="triangle triangle2"></div>
+        </section>
+        <header>
+            <section class="information">
+                <section class="contact">
+                    <div>
+                        <p id="phone">(044) 222 5 222</p>
+                        <p id="schedule">24 години / 7 днів на тиждень</p>
+                        <p id="delivery">Безкоштовна доставка піци</p>
+                    </div>
+                    <button class="exitButton">Ввійти</button>
+                </section>
+                <section class="information-row">
+                    <p id="pizza-label">Піца</p>
+                    <button class="exitButton" id="hidButton">Ввійти</button>
+                </section>
+            </section>
+        </header>
+        <section class="head-menu">
+            <div class="all-pizza"><strong>Усі піци</strong><div class="quantity">8</div></div>
+            <div id="filter">
+                <button class="select-decelect active" data-filter="Усі">Усі піци</button>
+                <button class="select-decelect" data-filter="М’ясна піца">М’ясні піци</button>
+                <button class="select-decelect" data-filter="З ананасами">З ананасами</button>
+                <button class="select-decelect" data-filter="З грибами">З грибами</button>
+                <button class="select-decelect" data-filter="З морепродуктами">З морепродуктами</button>
+                <button class="select-decelect" data-filter="Вега піца">Вега піци</button>
+            </div>
+        </section>
+        
+        <section id="pizzas-wrapper"></section>
+        <div class="lower-badge">
+            <section id="badgeSale">
+                <div id="textSale">ЦЬОГО ТИЖНЯ НА ВСЕ</div>
+                <div id="sale">-20%</div>
+                <div id="saleStrip"></div>
+                <div class="triangle triangle3"></div>
+                <div class="triangle triangle4"></div>
+            </section>
+        </div>
+        <footer>
+            <p>Pizza.24 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії <br>Доставка піци не здійснюється</p>
+            <button class="more"><a href="diagram.html">Статистика</a></button>
+        </footer>
+    </div>
+    
+    <div class="right-block">
+        <section id="head-label">
+            <section class="order">
+                <div class="orderLabel"><b>Замовлення</b><div id="circle">0</div></div>
+                <div class="cancel-order" id="clearLabel">Очистити замовлення</div>
+            </section>
+        </section>        
+        <section class="panelForOrdering">
+                <div class="orderText">
+                     <div id="textSum">Сума замовлення</div>
+                     <div id="sumOfAll">0 грн</div>
+                 </div>
+                 <button id="orderButton" class="buyButton">Замовити</button>
+         </section>
+        <section id="orderedPizzasContainer" class="orderPizzas"></section>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
